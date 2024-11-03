@@ -1,0 +1,110 @@
+Base 0
+Current Level:1
+Experience To The Next Level:20
+Current Level:2
+Experience To The Next Level:40
+Current Level:3
+Experience To The Next Level:60
+Current Level:4
+Experience To The Next Level:80
+Current Level:5
+Experience To The Next Level:100
+Current Level:6
+Experience To The Next Level:120
+Current Level:7
+Experience To The Next Level:140
+Current Level:8
+Experience To The Next Level:160
+Current Level:9
+Experience To The Next Level:180
+Current Level:10
+Experience To The Next Level:200 (Not counted)
+Total Xp required: 900
+
+Base 1
+Current Level:1
+Experience To The Next Level:21
+Current Level:2
+Experience To The Next Level:41
+Current Level:3
+Experience To The Next Level:61
+Current Level:4
+Experience To The Next Level:81
+Current Level:5
+Experience To The Next Level:101
+Current Level:6
+Experience To The Next Level:121
+Current Level:7
+Experience To The Next Level:141
+Current Level:8
+Experience To The Next Level:161
+Current Level:9
+Experience To The Next Level:181
+Current Level:10
+Experience To The Next Level:201
+
+Base 5
+Current Level:1
+Experience To The Next Level:27
+Current Level:2
+Experience To The Next Level:47
+Current Level:3
+Experience To The Next Level:66
+Current Level:4
+Experience To The Next Level:86
+Current Level:5
+Experience To The Next Level:106
+Current Level:6
+Experience To The Next Level:126
+Current Level:7
+Experience To The Next Level:146
+Current Level:8
+Experience To The Next Level:166
+Current Level:9
+Experience To The Next Level:186
+Current Level:10
+Experience To The Next Level:206
+
+Base 15
+Current Level:1
+Experience To The Next Level:40
+Current Level:2
+Experience To The Next Level:60
+Current Level:3
+Experience To The Next Level:80
+Current Level:4
+Experience To The Next Level:100
+Current Level:5
+Experience To The Next Level:120
+Current Level:6
+Experience To The Next Level:140
+Current Level:7
+Experience To The Next Level:160
+Current Level:8
+Experience To The Next Level:180
+Current Level:9
+Experience To The Next Level:200
+Current Level:10
+Experience To The Next Level:219
+
+Base 30
+Current Level:1
+Experience To The Next Level:60
+Current Level:2
+Experience To The Next Level:80
+Current Level:3
+Experience To The Next Level:100
+Current Level:4
+Experience To The Next Level:120
+Current Level:5
+Experience To The Next Level:140
+Current Level:6
+Experience To The Next Level:160
+Current Level:7
+Experience To The Next Level:180
+Current Level:8
+Experience To The Next Level:200
+Current Level:9
+Experience To The Next Level:219
+Current Level:10
+Experience To The Next Level:239

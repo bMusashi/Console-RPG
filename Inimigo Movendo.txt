@@ -1,0 +1,72 @@
+private async static void EnemyMove()
+{
+    string[] direcoes = ["N", "S", "L", "O"];
+    while (EnemyMoving)
+    {
+        EnemyMoving = false;
+
+        string direcao = direcoes[rnd.Next(direcoes.Length)];
+
+        switch(direcao)
+        {
+            case "L":
+                for (int i = 0; i < rnd.Next() && Render.IsWalkable(Map, x + 1, y); i++)
+                {
+                    SetCursorPosition(x, y);
+                    Write("E");
+
+                    await Task.Delay(300);
+
+                    SetCursorPosition(x, y);
+                    Write(" ");
+                    Torny.Draw();
+
+                    x += 1;
+                }
+                break;
+            case "O":
+                for (int i = 0; i < rnd.Next() && Render.IsWalkable(Map, x - 1, y); i++)
+                {
+                    SetCursorPosition(x, y);
+                    Write("E");
+
+                    await Task.Delay(300);
+
+                    SetCursorPosition(x, y);
+                    Write(" ");
+                    Torny.Draw();
+                    x -= 1;
+                }
+                break;
+            case "S":
+                for (int i = 0; i < rnd.Next() && Render.IsWalkable(Map, x, y + 1); i++)
+                {
+                    SetCursorPosition(x, y);
+                    Write("E");
+
+                    await Task.Delay(300);
+
+                    SetCursorPosition(x, y);
+                    Write(" ");
+                    Torny.Draw();
+                    y += 1;
+                }
+                break;
+            case "N":
+                for (int i = 0; i < rnd.Next() && Render.IsWalkable(Map, x, y - 1); i++)
+                {
+                    SetCursorPosition(x, y);
+                    Write("E");
+
+                    await Task.Delay(300);
+
+                    SetCursorPosition(x, y);
+                    Write(" ");
+                    Torny.Draw();
+                    y -= 1;
+                }
+                break;
+        }
+        EnemyMoving = true;
+    }
+}

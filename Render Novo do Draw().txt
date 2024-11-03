@@ -1,0 +1,52 @@
+internal static void WorldDraw(string[,] grid, int playerX, int playerY)
+{
+    for (int y = 0; y < grid.GetLength(0) / 2; y++)
+    {
+        for (int x = 0; x < grid.GetLength(1); x++)
+        {
+
+            if (x == playerX && y == playerY)
+            {
+                ForegroundColor = Player.PlayerColor;
+                SetCursorPosition(x, y);
+                Write(Player.PlayerMarker);
+            }
+            else if (grid.GetLength(1) - 1 - x == playerX && grid.GetLength(0) - 1 - y == playerY)
+            {
+                ForegroundColor = Player.PlayerColor;
+                SetCursorPosition(grid.GetLength(1) - 1 - x, grid.GetLength(0) - 1 - y);
+                Write(Player.PlayerMarker);
+            }
+            else
+            {
+                string elementT = grid[y, x];
+
+                if (NextToPlayerElement(playerX, playerY, x, y)) ForegroundColor = ElementColor(elementT);
+                else ForegroundColor = ConsoleColor.Black;
+
+                if (y == 0 || y == 39 || x == 0 || x == 79) ForegroundColor = ConsoleColor.White;
+
+                ForegroundColor = ElementColor(elementT); //
+
+                SetCursorPosition(x, y);
+                Write(elementT);
+
+                string elementB = grid[grid.GetLength(0) - 1 - y, grid.GetLength(1) - 1 - x];
+
+                if (NextToPlayerElement(playerX, playerY, grid.GetLength(1) - 1 - x, grid.GetLength(0) - 1 - y)) ForegroundColor = ElementColor(elementB);
+                else ForegroundColor = ConsoleColor.Black;
+
+                if (y == 0 || y == 39 || x == 0 || x == 79) ForegroundColor = ConsoleColor.White;
+
+                ForegroundColor = ElementColor(elementB); //
+
+                SetCursorPosition(grid.GetLength(1) - 1 - x, grid.GetLength(0) - 1 - y);
+                Write(elementB);
+            }
+
+            ResetColor();
+
+            //Thread.Sleep(10);
+        }
+    }
+}

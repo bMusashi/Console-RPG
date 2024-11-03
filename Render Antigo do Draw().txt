@@ -1,0 +1,32 @@
+internal static void WorldDraw(string[,] grid, int playerX, int playerY)
+{
+    for (int y = 0; y < grid.GetLength(0); y++)
+    {
+        for (int x = 0; x < grid.GetLength(1); x++)
+        {
+            if(x == playerX && y == playerY)
+            {
+                ForegroundColor = Player.PlayerColor;
+                Write(Player.PlayerMarker);
+            }
+            else
+            {
+                string element = grid[y, x];
+
+                if (element != " ")
+                {
+                    if (NextToPlayerElement(playerX, playerY, x, y)) ForegroundColor = ElementColor(element);
+                    else ForegroundColor = ConsoleColor.Black;
+
+                    if (y == 0 || y == 39 || x == 0 || x == 79) ForegroundColor = ConsoleColor.White;
+                }
+
+                ForegroundColor = ElementColor(element);
+
+                SetCursorPosition(x, y);
+                Write(element);
+                ResetColor();
+            }                    
+        }
+    }
+}

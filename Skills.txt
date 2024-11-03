@@ -1,0 +1,21 @@
+Ataque Leve                  |Player, Skeleton, Thief, Bandit, Serpent Man
+Ataque Pesado                |Player, Bandit, Serpent Man, Undead, Bandit Marauder, Mad Warrior
+
+Golpe Rápido                 |Player, Skeleton, Thief, Bandit, Serpent Man
+Estocada                     |Player, Thief
+Corte da Lua                 |Player, Serpent Man
+Dilacerar                    |Player, Mad Warrior
+Raios Divinos                |Player
+
+Bite(GiantRat)               |Giant Rat OK
+
+Bite(Undead)                 |Undead OK
+
+Smash(Bandit Marauder)       |Bandit Marauder
+Body Crush(Bandit Marauder)  |Bandit Marauder
+
+Body Slam(Mad Warrior)       |Mad Warrior
+
+Bite(Undead Dragon)          |Undead Dragon
+Fire Breath(Undead Dragon)   |Undead Dragon
+Tail Whipping(Undead Dragon) |Undead Dragon
