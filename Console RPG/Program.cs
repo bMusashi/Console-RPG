@@ -13,8 +13,8 @@ namespace Console_RPG
             SetWindowSize(Width, Height);
             SetBufferSize(Width, Height);
 
-            //Inicia a tela principal
-            Game.StartScreen();
+            //Inicia a tela principal Apt
+            Game.StartScreen();            
         }        
     }
 }
