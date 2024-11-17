@@ -5,7 +5,7 @@ namespace Console_RPG.Entities
     {
         internal Skeleton()
         {
-            Name = "Esqueleto";
+            Name = Game.currentLanguageStrings["EnemySkeletonName"];
             EnemySprite = "Text_Files\\Enemies_Sprite\\Skeleton.txt";
 
             CurrentLevel = 1;
@@ -27,8 +27,8 @@ namespace Console_RPG.Entities
             DamageCalculator();
             DefenseCalculator();
 
-            EquipedWeapon = new Weapons("Falcata de Ferro Antiga", "", 2);
-            EquipedArmor = new Armors("Roupas Esfarrapadas", "", 2);
+            EquipedWeapon = new Weapons(Game.currentLanguageStrings["AncientIronFalcataName"], "", 2);
+            EquipedArmor = new Armors(Game.currentLanguageStrings["TatteredClothesName"], "", 2);
         }
     }
 }

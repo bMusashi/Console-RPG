@@ -6,7 +6,7 @@ namespace Console_RPG.Entities
     {
         internal SerpentMan()
         {
-            Name = "Homem Serpente";
+            Name = Game.currentLanguageStrings["EnemySerpentManName"];
             EnemySprite = "Text_Files\\Enemies_Sprite\\Serpent_Man.txt";
 
             CurrentLevel = 2;
@@ -28,8 +28,8 @@ namespace Console_RPG.Entities
             DamageCalculator();
             DefenseCalculator();
 
-            EquipedWeapon = new Weapons("Serpentina dos Homens Serpentes", "", 6);
-            EquipedArmor = new Armors("Explorer Armor", "", 4);            
+            EquipedWeapon = new Weapons(Game.currentLanguageStrings["SerpentMen'sSerpentinaName"], "", 6);
+            EquipedArmor = new Armors(Game.currentLanguageStrings["Explorer'sJacketName"], "", 4);            
         }
     }
 }

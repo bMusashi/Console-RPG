@@ -36,10 +36,10 @@ namespace Console_RPG.Entities
             Experience = 0;            
 
             Inventory = new List<Item>();
-            Attacks[0] = "Ataque Leve";
-            Attacks[1] = "Ataque Pesado";
+            Attacks[0] = Game.currentLanguageStrings["PlayerLightAttack"];
+            Attacks[1] = Game.currentLanguageStrings["PlayerHeavyAttack"];
 
-            TakeSkill("Golpe Rápido");
+            TakeSkill(Game.currentLanguageStrings["PlayerSkillSlash"]);
 
             HealthCalculator();
             StaminaCalculator();
@@ -68,9 +68,18 @@ namespace Console_RPG.Entities
             Experience += experienceDroped;
             Render.ConsoleClear("                                  ", 5, 95, 34);
             SetCursorPosition(95, 34);
-            Write($"{experienceDroped} pontos de experiência recebida.");
+            string message = $"{experienceDroped} {Game.currentLanguageStrings["RecieveExperienceText"]}";
+
+            if (message.Length < 34) Write(message);
+            else
+            {
+                Write($"{message[..34]}");
+                SetCursorPosition(95, 35);
+                if (message[34..].StartsWith(' ')) Write($"{message[35..]}"); else Write($"{message[34..]}");
+            }
+
             SetCursorPosition(95, 38);
-            Write("Continuar...");
+            Write(Game.currentLanguageStrings["Continue"]);
             ReadKey();
         }
         internal void StatsMenu()
@@ -80,39 +89,39 @@ namespace Console_RPG.Entities
             int playerSpPercentage = Convert.ToInt32(Convert.ToDouble(CurrentStaminaPoints) / Convert.ToDouble(CurrentMaxStaminaPoints) * 100);
 
             SetCursorPosition(101, 1);
-            Write("[Status]");
+            Write(Game.currentLanguageStrings["StatsMenuStats"]);
 
             SetCursorPosition(81, 3);
-            Write($"Nível: {CurrentLevel} Experiência: {Experience} / {ExperienceToNextLevel}");            
+            Write($"{Game.currentLanguageStrings["StatsMenuLevel"]}: {CurrentLevel} {Game.currentLanguageStrings["StatsMenuExperience"]}: {Experience} / {ExperienceToNextLevel}");            
 
             SetCursorPosition(81, 5);
-            Write($"Vida: {CurrentHealthPoints} / {CurrentMaxHealthPoints}");
+            Write($"{Game.currentLanguageStrings["StatsMenuHealth"]}: {CurrentHealthPoints} / {CurrentMaxHealthPoints}");
             SetCursorPosition(81, 6);
             Write("[                                              ]");
             Menu.PercentageBar(playerHpPercentage, 46, 82, 6, ConsoleColor.DarkRed);
 
             SetCursorPosition(81, 7);
-            Write($"Energia: {CurrentStaminaPoints} / {CurrentMaxStaminaPoints}");
+            Write($"{Game.currentLanguageStrings["StatsMenuEnergy"]}: {CurrentStaminaPoints} / {CurrentMaxStaminaPoints}");
             SetCursorPosition(81, 8);
             Write("[                                              ]");
             Menu.PercentageBar(playerSpPercentage, 46, 82, 8, ConsoleColor.DarkGreen);
 
             SetCursorPosition(81, 10);
-            Write($"Dano: {DamageCalculator()}");
+            Write($"{Game.currentLanguageStrings["StatsMenuDamage"]}: {DamageCalculator()}");
             SetCursorPosition(81, 11);
-            Write($"Arma: {EquipedWeapon.Name}");
+            Write($"{Game.currentLanguageStrings["StatsMenuWeapon"]}: {EquipedWeapon.Name}");
 
             SetCursorPosition(81, 13);
-            Write($"Defesa: {DefenseCalculator()}");
+            Write($"{Game.currentLanguageStrings["StatsMenuDefense"]}: {DefenseCalculator()}");
             SetCursorPosition(81, 14);
-            Write($"Armadura: {EquipedArmor.Name}");
+            Write($"{Game.currentLanguageStrings["StatsMenuArmor"]}: {EquipedArmor.Name}");
 
             bool AvaliableMenu = true;
             while (AvaliableMenu)
             {
                 ForegroundColor = ConsoleColor.White;                
                 SetCursorPosition(102, 16);
-                Write("[Sair]");
+                Write(Game.currentLanguageStrings["StatsMenuQuit"]);
                 ResetColor();
 
                 ConsoleKeyInfo PressedKey;
@@ -136,7 +145,7 @@ namespace Console_RPG.Entities
         {
             Render.Draw(LevelParser.ParseFileToArray("Text_Files\\Inventory&Skills&Stats_Box.txt"), 80, 0);
             SetCursorPosition(99, 1);
-            Write("[Inventário]");
+            Write(Game.currentLanguageStrings["InventoryMenuInventory"]);
 
             bool AvaliableMenu = true;
             int SelectedIndex = 0;
@@ -189,7 +198,7 @@ namespace Console_RPG.Entities
                         {
                             Write($"{prefix} {ShowedItems[0 + i].Name}");
                             ForegroundColor = ConsoleColor.Yellow;
-                            Write(" <Equipado>");
+                            Write($" {Game.currentLanguageStrings["InventoryMenuEquipped"]}");
                             ResetColor();
                         }
                         else Write($"{prefix} {ShowedItems[0 + i].Name}");
@@ -204,44 +213,44 @@ namespace Console_RPG.Entities
                 else Render.ConsoleClear("                                                  ", 11, 80, 18);
 
                 SetCursorPosition(81, 16);
-                Write("[<]                                          [>]");
+                Write("[<]                                          [>]");               
 
                 string type;
                 switch (IndexPag)
                 {
                     case 0:
-                        type = "Armas";
-                        SetCursorPosition(101, 16);
+                        type = Game.currentLanguageStrings["InventoryMenuWeapons"];
+                        SetCursorPosition(84, 16);
                         Write($"[{type}]");
                         break;
                     case 1:
-                        type = "Armaduras";
-                        SetCursorPosition(99, 16);
+                        type = Game.currentLanguageStrings["InventoryMenuArmors"];
+                        SetCursorPosition(89, 16);
                         Write($"[{type}]");
                         break;
                     case 2:
-                        type = "Chaves";
-                        SetCursorPosition(101, 16);
+                        type = Game.currentLanguageStrings["InventoryMenuKeys"];
+                        SetCursorPosition(95, 16);
                         Write($"[{type}]");
                         break;
                     case 3:
-                        type = "Poções";
-                        SetCursorPosition(101, 16);
+                        type = Game.currentLanguageStrings["InventoryMenuPotions"];
+                        SetCursorPosition(100, 16);
                         Write($"[{type}]");
                         break;
                     case 4:
-                        type = "Comidas";
-                        SetCursorPosition(100, 16);
+                        type = Game.currentLanguageStrings["InventoryMenuFood"];
+                        SetCursorPosition(106, 16);
                         Write($"[{type}]");
                         break;
                     case 5:
-                        type = "Diversos";
-                        SetCursorPosition(100, 16);
+                        type = Game.currentLanguageStrings["InventoryMenuMiscellaneous"];
+                        SetCursorPosition(112, 16);
                         Write($"[{type}]");
                         break;
                     case 6:
-                        type = "Notas";
-                        SetCursorPosition(102, 16);
+                        type = Game.currentLanguageStrings["InventoryMenuNotes"];
+                        SetCursorPosition(119, 16);
                         Write($"[{type}]");
                         break;
                 }
@@ -312,7 +321,7 @@ namespace Console_RPG.Entities
         {
             Render.Draw(LevelParser.ParseFileToArray("Text_Files\\Inventory&Skills&Stats_Box.txt"), 80, 0);
             SetCursorPosition(99, 1);
-            Write("[Técnicas]");
+            Write(Game.currentLanguageStrings["SkillsMenuSkills"]);
 
             bool AvaliableSkillMenu = true;
             int SelectedIndex = 0;
@@ -327,30 +336,38 @@ namespace Console_RPG.Entities
                     {
                         Write($"{prefix} {Skills[i]}");
                         ForegroundColor = ConsoleColor.Yellow;
-                        Write(" <Equipado>");
+                        Write($" {Game.currentLanguageStrings["SkillsMenuEquipped"]}");
                         ResetColor();
                     }
                     else Write($"{prefix} {Skills[i]}");
                 }
-                ResetColor();
+                ResetColor();                
 
                 try
                 {
                     switch (Skills[SelectedIndex])
                     {
+                        case "Slash":
                         case "Golpe Rápido":
+                        case "Thrust":
                         case "Estocada":
                             SetCursorPosition(81, 14);
-                            Write("[Custo de Energia: 3]");
+                            Write(Game.currentLanguageStrings["SkillsMenuEnergyCost3"]);
                             break;
+                        case "Moon Slash":
+                        case "Corte de Luna":
                         case "Corte da Lua":
+                        case "Blood Thrust":
+                        case "Desgarrar":
                         case "Dilacerar":
                             SetCursorPosition(81, 14);
-                            Write("[Custo de Energia: 5]");
+                            Write(Game.currentLanguageStrings["SkillsMenuEnergyCost5"]);
                             break;
+                        case "God Rays":
                         case "Raios Divinos":
+                        case "Rayos Divinos":
                             SetCursorPosition(81, 14);
-                            Write("[Custo de Energia: 40]");
+                            Write(Game.currentLanguageStrings["SkillsMenuEnergyCost40"]);
                             break;
                     }
                 }
@@ -358,7 +375,7 @@ namespace Console_RPG.Entities
 
                 ForegroundColor = (SelectedIndex == Skills.Count) ? ConsoleColor.White : ConsoleColor.DarkGray;
                 SetCursorPosition(102, 16);
-                Write("[Sair]");
+                Write(Game.currentLanguageStrings["SkillsMenuQuit"]);
                 ResetColor();
 
                 ConsoleKeyInfo PressedKey;
@@ -411,9 +428,18 @@ namespace Console_RPG.Entities
 
                 Render.ConsoleClear("                                  ", 5, 95, 34);
                 SetCursorPosition(95, 34);
-                Write($"Seus atributos fisicos aumentaram!");
+                string message = (Game.currentLanguageStrings["LevelUpText"]);
+
+                if (message.Length < 34) Write(message);
+                else
+                {
+                    Write($"{message[..34]}");
+                    SetCursorPosition(95, 35);
+                    if (message[34..].StartsWith(' ')) Write($"{message[35..]}"); else Write($"{message[34..]}");
+                }
+
                 SetCursorPosition(95, 38);
-                Write("Continuar...");
+                Write(Game.currentLanguageStrings["Continue"]);
                 ReadKey();
             }
         }
@@ -424,12 +450,12 @@ namespace Console_RPG.Entities
         internal void FoundItem(Item item)
         {
             Inventory.Add(item);
-            GameConsole.ConsoleOutput($"{item.Name} foi adicionado ao inventário.");
+            GameConsole.ConsoleOutput($"{item.Name} {Game.currentLanguageStrings["HasBeenAddedToTheInventory"]}");
         }
         internal void RemoveItem(Item item)
         {
             Inventory.Remove(item);
-            GameConsole.ConsoleOutput($"{item.Name} foi removido do inventário.");
+            GameConsole.ConsoleOutput($"{item.Name} {Game.currentLanguageStrings["WasRemovedFromTheInventory"]}");
         }
         internal void EquipItem(Item item)
         {
@@ -450,12 +476,12 @@ namespace Console_RPG.Entities
             {
                 Sound.SFXPlayer("DrinkPotionSFX.wav");
                 Potions p = (Potions)item;
-                if (item.Name.Contains("Calêndula"))
+                if (item.Name.Contains(Game.currentLanguageStrings["BattleItemPieceCalendula"]))
                 {
                     RecieveHealthPoints(p.HealingPotion());
                     Inventory.Remove(item);
                 }
-                else if (item.Name.Contains("Ephedra"))
+                else if (item.Name.Contains(Game.currentLanguageStrings["BattleItemPieceEphedra"]))
                 {
                     RecieveStaminaPoints(p.AdrenalinePotion());
                     Inventory.Remove(item);
@@ -487,34 +513,34 @@ namespace Console_RPG.Entities
         }
         internal void UseItemBattle(Potions potion)
         {
-            if (potion.Name.Contains("Calêndula"))
+            if (potion.Name.Contains(Game.currentLanguageStrings["BattleItemPieceCalendula"]))
             {
                 RecieveHealthPoints(potion.HealingPotion());
                 Inventory.Remove(potion);
 
                 Render.ConsoleClear("                                  ", 5, 95, 34);
-                string text = $"Você usou {potion.Name} e recuperou {potion.HealAmount} pontos de vida!";
+                string text = $"{Game.currentLanguageStrings["UseItemBattlePartOne"]} {potion.Name} {Game.currentLanguageStrings["UseItemBattlePartTwo"]} {potion.HealAmount} {Game.currentLanguageStrings["UseItemBattlePartThreeHP"]}";
                 SetCursorPosition(95, 34);
                 Write($"{text[..34]}");
                 SetCursorPosition(95, 35);
                 if (text[34..].StartsWith(' ')) Write($"{text[35..]}"); else Write($"{text[34..]}");
                 SetCursorPosition(95, 38);
-                Write("Continuar...");
+                Write(Game.currentLanguageStrings["Continue"]);
                 ReadKey();
             }
-            else if (potion.Name.Contains("Ephedra"))
+            else if (potion.Name.Contains(Game.currentLanguageStrings["BattleItemPieceEphedra"]))
             {
                 RecieveStaminaPoints(potion.AdrenalinePotion());
                 Inventory.Remove(potion);
 
                 Render.ConsoleClear("                                  ", 5, 95, 34);
-                string text = $"Você usou {potion.Name} e recuperou {potion.HealAmount} pontos de Energia!";
+                string text = $"{Game.currentLanguageStrings["UseItemBattlePartOne"]} {potion.Name} {Game.currentLanguageStrings["UseItemBattlePartTwo"]} {potion.HealAmount} {Game.currentLanguageStrings["UseItemBattlePartThreeSP"]}";
                 SetCursorPosition(95, 34);
                 Write($"{text[..34]}");
                 SetCursorPosition(95, 35);
                 if (text[34..].StartsWith(' ')) Write($"{text[35..]}"); else Write($"{text[34..]}");
                 SetCursorPosition(95, 38);
-                Write("Continuar...");
+                Write(Game.currentLanguageStrings["Continue"]);
                 ReadKey();
             }
         }
@@ -535,18 +561,18 @@ namespace Console_RPG.Entities
             Write(Name);
 
             SetCursorPosition(81, 28);
-            Write($"PV: {CurrentHealthPoints}/{CurrentMaxHealthPoints}");
+            Write($"{Game.currentLanguageStrings["BattleInformationHP"]}: {CurrentHealthPoints}/{CurrentMaxHealthPoints}");
             Menu.PercentageBar(HpPercentage, 9, 82, 29, ConsoleColor.DarkRed);
 
             SetCursorPosition(93, 28);
-            Write($"PE: {CurrentStaminaPoints}/{CurrentMaxStaminaPoints}");
+            Write($"{Game.currentLanguageStrings["BattleInformationSP"]}: {CurrentStaminaPoints}/{CurrentMaxStaminaPoints}");
             Menu.PercentageBar(SpPercentage, 9, 94, 29, ConsoleColor.DarkGreen);
 
             SetCursorPosition(82, 31);
-            if (EquipedWeapon.Name != "Vazio") Write(EquipedWeapon.Name.Substring(0, (EquipedWeapon.Name.Length < 9) ? EquipedWeapon.Name.Length : 9)); else Write("  Vazio  ");
+            if (EquipedWeapon.Name != Game.currentLanguageStrings["BattleInformationEmpty"]) Write(EquipedWeapon.Name.Substring(0, (EquipedWeapon.Name.Length < 9) ? EquipedWeapon.Name.Length : 9)); else Write($"  {Game.currentLanguageStrings["BattleInformationEmpty"]}  ");
 
             SetCursorPosition(94, 31);
-            if (EquipedArmor.Name != "Vazio") Write(EquipedArmor.Name.Substring(0, (EquipedArmor.Name.Length < 9) ? EquipedArmor.Name.Length : 9)); else Write("  Vazio  ");
+            if (EquipedArmor.Name != Game.currentLanguageStrings["BattleInformationEmpty"]) Write(EquipedArmor.Name.Substring(0, (EquipedArmor.Name.Length < 9) ? EquipedArmor.Name.Length : 9)); else Write($"  {Game.currentLanguageStrings["BattleInformationEmpty"]}  ");
         }
     }
 }

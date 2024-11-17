@@ -1,4 +1,6 @@
 ﻿global using static System.Console;
+global using Newtonsoft.Json;
+using Console_RPG.Assistant;
 namespace Console_RPG
 {
     class Program
@@ -13,8 +15,8 @@ namespace Console_RPG
             SetWindowSize(Width, Height);
             SetBufferSize(Width, Height);
 
-            //Inicia a tela principal Apt
-            Game.StartScreen();            
+            //Inicia a tela principal
+            Menu.StartScreen("Languages\\en-US.json");            
         }        
     }
 }

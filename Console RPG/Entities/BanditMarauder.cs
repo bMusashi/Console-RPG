@@ -6,7 +6,7 @@ namespace Console_RPG.Entities
     {
         internal BanditMarauder()
         {
-            Name = "Bandido Saqueador";
+            Name = Game.currentLanguageStrings["EnemyBanditMarauderName"];
             EnemySprite = "Text_Files\\Enemies_Sprite\\Bandit_Marauder.txt";
 
             CurrentLevel = 3;
@@ -28,8 +28,8 @@ namespace Console_RPG.Entities
             DamageCalculator();
             DefenseCalculator();
 
-            EquipedWeapon = new Weapons("Claymore de Aço", "", 6);
-            EquipedArmor = new Armors("Cota de Malha de Ferro", "", 6);            
+            EquipedWeapon = new Weapons(Game.currentLanguageStrings["SteelClaymoreName"], "", 6);
+            EquipedArmor = new Armors(Game.currentLanguageStrings["IronChainmailName"], "", 6);            
         }
     }
 }

@@ -24,13 +24,13 @@ namespace Console_RPG.Items
             Render.ConsoleClear("                                                  ", 11, 80, 18);            
             Render.Draw(LevelParser.ParseFileToArray("Text_Files\\Console_Box.txt"), 80, 18);
             SetCursorPosition(81, 19);
-            Write($"Nome: {Name}");
+            Write($"{Game.currentLanguageStrings["InventoryTextName"]}: {Name}");
 
             SetCursorPosition(81,21);
-            if (Name.Contains("Calêndula")) Write($"Vida recuperada: {HealAmount} pontos."); else Write($"Energia recuperada: {HealAmount} pontos.");
+            if (Name.Contains(Game.currentLanguageStrings["BattleItemPieceCalendula"])) Write($"{Game.currentLanguageStrings["InventoryTextHealthRestored"]}: {HealAmount} {Game.currentLanguageStrings["ItemDescriptionPoints"]}"); else Write($"{Game.currentLanguageStrings["InventoryTextEnergyRestored"]}: {HealAmount} {Game.currentLanguageStrings["ItemDescriptionPoints"]}");
 
             SetCursorPosition(81, 23);
-            Write($"Descrição: ");
+            Write($"{Game.currentLanguageStrings["InventoryTextDescription"]}: ");
 
             string[] DescriptionSplited = Description.Split('|');
 

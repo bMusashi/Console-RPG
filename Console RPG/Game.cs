@@ -1,7 +1,5 @@
 ﻿using Console_RPG.Assistant;
 using Console_RPG.Entities;
-using Console_RPG.Items;
-using System.Numerics;
 //Projeto terminado com sucesso!
 namespace Console_RPG
 {
@@ -11,7 +9,8 @@ namespace Console_RPG
         private readonly static Random rnd = new();
         private static string[,] Map;
         private static string CurrentMap;
-        private static void Start()
+        internal static Dictionary<string, string> currentLanguageStrings;        
+        internal static void Start()
         {
             //Restart Maps
             ResetMap("Catacombs");
@@ -22,7 +21,7 @@ namespace Console_RPG
             ResetMap("Bandits_Domain");
             ResetMap("Underground_Passage");
             ResetMap("Ancient_Dragon_Cave");
-            ResetMap("Confinement");            
+            ResetMap("Confinement");
             //Reset Game
             Torny = new(2, 3);
             Map = LevelParser.ParseFileToArray($"Text_Files\\Maps\\Catacombs.txt");
@@ -34,83 +33,6 @@ namespace Console_RPG
         {
             string[,] MapToRestore = LevelParser.ParseFileToArray($"Text_Files\\Maps_Backup\\{MapName}.txt");
             LevelParser.MatrixToText(MapToRestore, MapName);
-        }
-        internal static void StartScreen()
-        {            
-            Render.Draw(LevelParser.ParseFileToArray("Text_Files\\Start_Screen.txt"), 32, 11);
-            string[] Options = ["Iniciar", "Como jogar", "Sair"];           
-            int SelectedIndex = 1;
-            bool AvaliableMenu = true;
-            while(AvaliableMenu)
-            {
-                Render.ConsoleClear("                                                              ", 10, 56, 29);
-                for (int i = 0; i < Options.Length; i++)
-                {                    
-                    ForegroundColor = (i == SelectedIndex) ? ConsoleColor.White : ConsoleColor.DarkGray;
-
-                    SetCursorPosition(32, 31 + i + i);
-                    Write($"{Options[i]}");
-
-                    ResetColor();
-                    if (SelectedIndex == 1)
-                    {
-                        SetCursorPosition(56, 29);
-                        Write("Use as setas do teclado para se mover.");
-                        SetCursorPosition(56, 30);
-                        Write("Use 'Enter' para interagir com os elementos presentes no mapa.");
-                        SetCursorPosition(56, 31);
-                        Write("Descrição dos elementos do mapa:");                        
-                        StartScreenAux(56, 32, ConsoleColor.Yellow, "C: Báu");
-                        StartScreenAux(56, 33, ConsoleColor.Red, "E: Inimigo");
-                        StartScreenAux(56, 34, ConsoleColor.White, "?: Ponto de Interesse");
-                        StartScreenAux(56, 35, ConsoleColor.DarkYellow, "|: Porta");
-                        StartScreenAux(56, 36, ConsoleColor.DarkYellow, "-: Porta");
-                        StartScreenAux(56, 37, ConsoleColor.Cyan, ".: Item");
-                        StartScreenAux(56, 38, ConsoleColor.DarkRed, "!: Objetivo");                        
-                    }                    
-                }
-
-                ConsoleKeyInfo PressedKey;
-
-                do
-                {
-                    PressedKey = ReadKey(true);
-                }
-                while (KeyAvailable);
-
-                switch(PressedKey.Key)
-                {
-                    case ConsoleKey.UpArrow:
-                        SelectedIndex--;
-                        if (SelectedIndex < 0) SelectedIndex = Options.Length - 1;
-                        break;
-                    case ConsoleKey.DownArrow:
-                        SelectedIndex++;
-                        if (SelectedIndex > Options.Length - 1) SelectedIndex = 0;
-                        break;
-                    case ConsoleKey.Enter:
-                        switch(SelectedIndex)
-                        {
-                            case 0:
-                                Clear();
-                                Thread.Sleep(200);
-                                Start();
-                                break;
-                            case 2:
-                                Environment.Exit(0);
-                                break;
-                        }                        
-                        break;
-                }
-            }            
-        }
-        private static void StartScreenAux(int x, int y, ConsoleColor color, string text)
-        {
-            SetCursorPosition(x, y);
-            ForegroundColor = color;
-            Write(text.Substring(0,1));
-            ResetColor();
-            Write(text.Substring(1));
         }
         private static void PlayerInput()
         {
@@ -330,7 +252,7 @@ namespace Console_RPG
         {
             Clear();
             SetCursorPosition(59, 38);
-            Write("Continuar...");
+            Write(Game.currentLanguageStrings["Continue"]);
             ForegroundColor = ConsoleColor.DarkRed;
             Render.Draw(LevelParser.ParseFileToArray("Text_Files\\GameOver.txt"), 27, 14);
             int[] Xpos = [31, 32, 33, 47, 54, 55, 59, 62, 80, 87, 90, 93];

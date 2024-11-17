@@ -1,7 +1,5 @@
 ﻿using Console_RPG.Entities;
 using Console_RPG.Items;
-using System.Numerics;
-using System.Xml.Linq;
 
 namespace Console_RPG.Assistant
 {
@@ -9,77 +7,76 @@ namespace Console_RPG.Assistant
     {
         private static List<Weapons> Weapons = new()
         {
-            new ("Adaga", "Arma de curto alcance, porém, quando usada por |mãos hábeis, pode causar grande dano.",4),
-            new ("Falcata de Ferro Antiga", "Uma antiga espada de ferro, tão desgastada que |quase não se vê fio. Há algo gravado nela, mas |não é possível ler.",2),
-            new ("Falcata de Ferro", "Espada feita de ferro fundido, possui um bom fio|e uma resistência mediana. Geralmente é usada |por bandidos e exploradores.",4),
-            new ("Claymore de Aço", "Espada feita puramente de aço, possui um ótimo |fio e uma grande resistência. Quase sempre usada|pelo exército real.", 6),
-            new ("Radiante", "Uma rara espada feita de um material misterioso,|era usada por clérigos para combater os |mortos-vivos e hereges.", 8),
-            new ("Serpentina dos Homens Serpentes", "Espada curva usada por estranhas criaturas |encontradas em cavernas. Relatos dizem que a |aparência desses seres é descrita como metade |homem, metade serpente.", 6),
-            new ("Cimitarra", "Espada curva usada por habilidosos espadachins |que habitam os desertos do sul.", 4),
-            new ("Eclipse", "Uma espada mística de aparência única, com |letras gravadas nela que aparentam ser de uma |língua muito antiga.|“Lunae Lumen”.", 8),
-            new ("Machado", "Usado por camponeses que habitavam a |região.", 4),
-            new ("Devastador", "Machado usado em batalhas, comumente portado por|guerreiros do norte. Com a técnica certa, é |possível cortar um homem adulto em dois.", 8),
-            new ("Cortador de Queixos", "Um estranho machado usado exclusivamente para |matar. Por alguma razão, o alvo de seus golpes |sempre é o queixo.", 8)
+            new (Game.currentLanguageStrings["DaggerName"], Game.currentLanguageStrings["DaggerDescription"],4),
+            new (Game.currentLanguageStrings["AncientIronFalcataName"], Game.currentLanguageStrings["AncientIronFalcataDescription"],2),
+            new (Game.currentLanguageStrings["IronFalcataName"], Game.currentLanguageStrings["IronFalcataDescription"],4),
+            new (Game.currentLanguageStrings["SteelClaymoreName"], Game.currentLanguageStrings["SteelClaymoreDescription"], 6),
+            new (Game.currentLanguageStrings["RadiantName"], Game.currentLanguageStrings["RadiantDescription"], 8),
+            new (Game.currentLanguageStrings["SerpentMen'sSerpentinaName"], Game.currentLanguageStrings["SerpentMen'sSerpentinaDescription"], 6),
+            new (Game.currentLanguageStrings["ScimitarName"], Game.currentLanguageStrings["ScimitarDescription"], 4),
+            new (Game.currentLanguageStrings["EclipseName"], Game.currentLanguageStrings["EclipseDescription"], 8),
+            new (Game.currentLanguageStrings["AxeName"], Game.currentLanguageStrings["AxeDescription"], 4),
+            new (Game.currentLanguageStrings["DevastatorName"], Game.currentLanguageStrings["DevastatorDescription"], 8),
+            new (Game.currentLanguageStrings["JawCutterName"], Game.currentLanguageStrings["JawCutterDescription"], 8)
         };
         private static List<Armors> Armors = new()
         {
-            new ("Roupas Esfarrapadas", "Roupas muito velhas que não proporcionam quase |nenhuma defesa. Há alguns buracos e pequenas |manchas de sangue.", 2),
-            new ("Couraça de Couro", "A proteção mais básica que você vai encontrar |por aqui. Quase sempre usada por ladrões e |soldados de baixa categoria.", 4),
-            new ("Jaquetão de Explorador", "Concede proteção suficiente para aqueles que |desejam explorar o mundo.", 4),
-            new ("Cota de Malha de Ferro", "Usada por bandidos e soldados do exército real, |oferece uma boa proteção nos combates.", 6),
-            new ("Armadura de Placas","Usada apenas por membros da elite do exército |real, oferece uma grande proteção nos combates.", 8),
-            new ("Manto Negro", "Armadura usada por membros da antiga seita que |trabalhava a mando do Rei Dorian. Exala um odor |forte de sangue... humano?", 6)
+            new (Game.currentLanguageStrings["TatteredClothesName"], Game.currentLanguageStrings["TatteredClothesDescription"], 2),
+            new (Game.currentLanguageStrings["LeatherBreastplateName"], Game.currentLanguageStrings["LeatherBreastplateDescription"], 4),
+            new (Game.currentLanguageStrings["Explorer'sJacketName"], Game.currentLanguageStrings["Explorer'sJacketDescription"], 4),
+            new (Game.currentLanguageStrings["IronChainmailName"], Game.currentLanguageStrings["IronChainmailDescription"], 6),
+            new (Game.currentLanguageStrings["PlateArmorName"], Game.currentLanguageStrings["PlateArmorDescription"], 8),
+            new (Game.currentLanguageStrings["BlackMantleName"], Game.currentLanguageStrings["BlackMantleDescription"], 6)
         };
         private static List<Keys> Keys = new()
         {
-            new ("Chave Enferrujada","Uma chave bem deteriorada, talvez abra as portas|deste maldito lugar."),
-            new ("Chave das Ruínas","Chave antiga e de aspecto rústico que abre a |porta para a antiga ruína cujo nome já foi |esquecido há muito tempo."),
-            new ("Chave do Selo","Possui formato arredondado e inscrições |retratando datas muito antigas. Há um nome |escrito na parte de trás.|“Jasmine”."),
-            new ("Grande Chave Antiga","Chave feita de ferro fundido, bastante pesada e |com alguns detalhes semelhantes a escamas."),
-            new ("Chave do Confinamento","Chave simples em aparência, mas complexa em |proteção. Abre as portas para a área solitária."),
-            new ("Chave de Baú","Usada para trancar ou destrancar baús.")
+            new (Game.currentLanguageStrings["RustyKeyName"], Game.currentLanguageStrings["RustyKeyDescription"]),
+            new (Game.currentLanguageStrings["RuinsKeyName"], Game.currentLanguageStrings["RuinsKeyDescription"]),
+            new (Game.currentLanguageStrings["SealKeyName"], Game.currentLanguageStrings["SealKeyDescription"]),
+            new (Game.currentLanguageStrings["GreatAncientKeyName"], Game.currentLanguageStrings["GreatAncientKeyDescription"]),
+            new (Game.currentLanguageStrings["ConfinementKeyName"], Game.currentLanguageStrings["ConfinementKeyDescription"]),
+            new (Game.currentLanguageStrings["ChestKeyName"], Game.currentLanguageStrings["ChestKeyDescription"])
         };
         private static List<Potions> Potions = new()
         {
-            new ("Poção de Calêndula Pequena", "Feita de flores colhidas nos campos no início do|verão. Ao ingerir, causa uma sensação agradável |e recupera um pouco de sua vitalidade.", 15),
-            new ("Poção de Calêndula Média","Feita de flores colhidas nos campos no início do|verão. Ao ingerir, causa uma sensação moderada |e recupera razoavelmente sua vitalidade.",25),
-            new ("Poção de Calêndula Grande","Feita de flores colhidas nos campos no início do|verão. Ao ingerir, causa uma sensação muito |agradável e recupera significativamente sua |vitalidade.",50),
-            new ("Poção de Ephedra Pequena","Feita de flores colhidas nas montanhas no meio |da primavera. Ao ingerir, acelera um pouco os |batimentos cardíacos e recupera um pouco seu |vigor.",15),
-            new ("Poção de Ephedra Média","Feita de flores colhidas nas montanhas no meio |da primavera. Ao ingerir, acelera |consideravelmente os batimentos cardíacos e |recupera razoavelmente seu vigor.", 25),
-            new ("Poção de Ephedra Grande","Feita de flores colhidas nas montanhas no meio |da primavera. Ao ingerir, acelera bastante os |batimentos cardíacos e recupera |significativamente seu vigor.",50),
+            new (Game.currentLanguageStrings["SmallCalendulaPotionName"], Game.currentLanguageStrings["SmallCalendulaPotionDescription"], 15),
+            new (Game.currentLanguageStrings["MediumCalendulaPotionName"], Game.currentLanguageStrings["MediumCalendulaPotionDescription"],25),
+            new (Game.currentLanguageStrings["LargeCalendulaPotionName"], Game.currentLanguageStrings["LargeCalendulaPotionDescription"],50),
+            new (Game.currentLanguageStrings["SmallEphedraPotionName"], Game.currentLanguageStrings["SmallEphedraPotionDescription"],15),
+            new (Game.currentLanguageStrings["MediumEphedraPotionName"],Game.currentLanguageStrings["MediumEphedraPotionDescription"], 25),
+            new (Game.currentLanguageStrings["LargeEphedraPotionName"], Game.currentLanguageStrings["LargeEphedraPotionDescription"],50),
         };
         private static List<Foods> Foods = new()
         {
-            new ("Carne de Rato Gigante", "Coletada de Ratos Gigantes, pode facilmente |matar se não for preparada corretamente.", "Bad", 15),
-            new ("Carne de Rato Gigante Cozida", "Mesmo algo grotesco como isso pode saciar a fome|dos mais desesperados.", "Good", 10),
-            new ("Pão Preto", "Feito de farinha de trigo, sal, mel e fermento. |É um ótimo acompanhamento para carnes e sopas.", "Good", 10),
-            new ("Quarto de Queijo", "Uma boa fonte de gordura, feito por fazendeiros |das redondezas.", "Excellent", 20),
-            new ("Maçãs", "Não parecem estar frescas, mas ainda são |comestíveis.", "Good", 10),
-            new ("Peixe", "Algumas criaturas conseguem viver nesses |lugares, mesmo sendo tão sujos.", "Bad", 15),
-            new ("Peixe Assado", "Essa refeição com certeza vai encher o seu |estômago.", "Good", 10),
-            new ("Maça Dourada", "Feita com várias tiras finas de ouro... Quem |será o criador disso?", "Excellent", 20)
+            new (Game.currentLanguageStrings["GiantRatMeatName"], Game.currentLanguageStrings["GiantRatMeatDescription"], "Bad", 15),
+            new (Game.currentLanguageStrings["CookedGiantRatMeatName"], Game.currentLanguageStrings["CookedGiantRatMeatDescription"], "Good", 10),
+            new (Game.currentLanguageStrings["BlackBreadName"], Game.currentLanguageStrings["BlackBreadDescription"], "Good", 10),
+            new (Game.currentLanguageStrings["CheeseWedgeName"], Game.currentLanguageStrings["CheeseWedgeDescription"], "Excellent", 20),
+            new (Game.currentLanguageStrings["ApplesName"], Game.currentLanguageStrings["ApplesDescription"], "Good", 10),
+            new (Game.currentLanguageStrings["FishName"], Game.currentLanguageStrings["FishDescription"], "Bad", 15),
+            new (Game.currentLanguageStrings["RoastedFishName"], Game.currentLanguageStrings["RoastedFishDescription"], "Good", 10),
+            new (Game.currentLanguageStrings["GoldenAppleName"], Game.currentLanguageStrings["GoldenAppleDescription"], "Excellent", 20)
         };
         private static List<Miscellaneous> Miscellaneous = new()
         {
-            new ("Colar", "Colar feito de prata, possui um pingente em |formato de folha. Alguém perdeu isso há muito |tempo atrás."),
-            new ("Colar Dourado", "Colar feito de ouro, possui um pingente em |formato de lua. Provavelmente foi usado por uma |rainha."),
-            new ("Pintura Antiga", "Antiga pintura retratando o rosto do Major |Edward, o administrador das catacumbas."),
-            new ("Livro de Histórias Infantis", "Pequeno livro azul, a capa, mesmo deteriorada, |mostra duas crianças brincando com seu cachorro.|O título é ilegível."),
-            new ("Antiga Escama de Dragão", "Pedaço de escama de um dragão negro. Esta pode |ser a primeira ou a última vez que você |encontrará isso."),
-            new ("Raízes Secas", "Raízes secas de uma margarida."),
-            new ("Pedra Estranha", "Pedra de coloração preta, quando reflete a luz, |revela pequenos pontos brancos semelhantes a |estrelas."),
-            new ("Anel", "Anel de ouro já opaco pelo tempo. Há uma data |gravada nele... Seria o dia de um casamento?"),
-            new ("Gazua", "Conjunto enferrujado de gazuas, uma delas ainda |é utilizável. Pode ser usada para abrir algo."),
+            new (Game.currentLanguageStrings["NecklaceName"], Game.currentLanguageStrings["NecklaceDescription"]),
+            new (Game.currentLanguageStrings["GoldenNecklaceName"], Game.currentLanguageStrings["GoldenNecklaceDescription"]),
+            new (Game.currentLanguageStrings["AncientPaintingName"], Game.currentLanguageStrings["AncientPaintingDescription"]),
+            new (Game.currentLanguageStrings["Children'sStorybookName"], Game.currentLanguageStrings["Children'sStorybookDescription"]),
+            new (Game.currentLanguageStrings["AncientDragonScaleName"], Game.currentLanguageStrings["AncientDragonScaleDescription"]),
+            new (Game.currentLanguageStrings["DriedRootsName"], Game.currentLanguageStrings["DriedRootsDescription"]),
+            new (Game.currentLanguageStrings["StrangeStoneName"], Game.currentLanguageStrings["StrangeStoneDescription"]),
+            new (Game.currentLanguageStrings["RingName"], Game.currentLanguageStrings["RingDescription"]),
+            new (Game.currentLanguageStrings["LockpickName"], Game.currentLanguageStrings["LockpickDescription"]),
         };
         private static List<Notes> Notes = new()
-        {
-            //012345678901234567890123456789012345678901234567|
-            new ("Nota:Fuga", "Pegue esses itens e dê o seu melhor para escapar|com vida."),
-            new ("Nota:Aviso", "Apenas pessoas autorizadas deverão entrar nessa |parte da prisão, e de forma alguma deixe essa |porta aberta."),
-            new ("Nota:Indagação","Tentei abrir esse baú usando todas as minhas cha|ves, mas nenhuma encaixa na fechadura."),
-            new ("Nota:Viagem", "Vou seguir viagem com uma caravana, ficarei fora|durante 7 meses para melhorar minhas habilidades|de combate."),                                  
-            new ("Nota:Expedição", "Hoje iniciaremos a expedição para matar o grande|dragão Visari..."),
-            new ("Nota:Ensanguentada", "Acredito que fui o único a sobreviver dessa bata|lha. Visari é um dragão formidável, sua força é |incomparável. Consegui cavar um túnel usando as |mãos, vou me recuperar e vou sair daqui amanh...")
+        {            
+            new (Game.currentLanguageStrings["NoteEscapeName"], Game.currentLanguageStrings["NoteEscapeDescription"]),
+            new (Game.currentLanguageStrings["NoteWarningName"], Game.currentLanguageStrings["NoteWarningDescription"]),
+            new (Game.currentLanguageStrings["NoteInquiryName"], Game.currentLanguageStrings["NoteInquiryDescription"]),
+            new (Game.currentLanguageStrings["NoteJourneyName"], Game.currentLanguageStrings["NoteJourneyDescription"]),                                  
+            new (Game.currentLanguageStrings["NoteExpeditionName"], Game.currentLanguageStrings["NoteExpeditionDescription"]),
+            new (Game.currentLanguageStrings["NoteBloodstainedName"], Game.currentLanguageStrings["NoteBloodstainedDescription"])
         };
         internal static void GameEventChests(Player player, string[,] map, string currentMap, string element)
         {
@@ -113,7 +110,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Está trancado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventIt’sLockedText"]);
                             }
                             break;
                     }
@@ -133,7 +130,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Está trancado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventIt’sLockedText"]);
                             }
                             break;
                     }
@@ -151,7 +148,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Está trancado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventIt’sLockedText"]);
                             }
                             break;
                     }
@@ -169,7 +166,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Está trancado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventIt’sLockedText"]);
                             }
                             break;
                         case 70:
@@ -182,7 +179,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Está trancado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventIt’sLockedText"]);
                             }
                             break;
                     }
@@ -200,7 +197,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Está trancado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventIt’sLockedText"]);
                             }
                             break;                        
                     }
@@ -220,7 +217,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Está trancado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventIt’sLockedText"]);
                             }
                             break;
                     }
@@ -230,7 +227,7 @@ namespace Console_RPG.Assistant
         internal static void GameEventBattles(Player player, string[,] map, string currentMap, string element) //Acredito que funcionou.
         {
             Enemy Target;
-            GameConsole.ConsoleOutput("A batalha irá começar");
+            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventTheBattleWillBegin"]);
 
             int[] ReturnsFromEnemySumPosition = new int[3];
 
@@ -482,33 +479,34 @@ namespace Console_RPG.Assistant
         }
         internal static void GameEventInterestPoints(Player player, string[,] map, string currentMap, string element)
         {
-            switch (currentMap)         {
+            switch (currentMap)
+            {
                 case "Catacombs":
                     switch (ElementSumPosition(player.Y, player.X, map, element))
                     {
                         case 27:
-                            GameConsole.ConsoleOutput("Placa: Acesso restrito.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventCatacombsInterestPointOne"]);
                             break;
                         case 31:
-                            GameConsole.ConsoleOutput("Cadáver de um carcereiro, os vermes já começaram a comer sua carne.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventCatacombsInterestPointTwo"]);
                             break;
                         case 30:
-                            GameConsole.ConsoleOutput("Esqueleto de um prisioneiro, número de identificação: 0178.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventCatacombsInterestPointThree"]);
                             break;
                         case 55:
-                            GameConsole.ConsoleOutput("Placa: Portão de entrada para as Catacumbas.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventCatacombsInterestPointFour"]);
                             break;
                         case 67:
-                            GameConsole.ConsoleOutput("Cadáver de um homem, não consta número de identificação.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventCatacombsInterestPointFive"]);
                             break;
                         case 83:
-                            GameConsole.ConsoleOutput("Suporte para molho de chave.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventCatacombsInterestPointSix"]);
                             break;
                         case 84:
-                            GameConsole.ConsoleOutput("Esqueleto de um guarda, ainda permanece sentado no seu posto.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventCatacombsInterestPointSeven"]);
                             break;
                         case 94:
-                            GameConsole.ConsoleOutput("Corpo do supervisor, Laurence, não apresenta sinais de violência, talvez tenha morrido de fome.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventCatacombsInterestPointEight"]);
                             break;
                     }
                     break;
@@ -516,16 +514,16 @@ namespace Console_RPG.Assistant
                     switch (ElementSumPosition(player.Y, player.X, map, element))
                     {                            
                         case 14:
-                            GameConsole.ConsoleOutput("Acampamento abandonado, sua construção foi feita de forma precária.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventAbandonedFortressInterestPointOne"]);
                             break;
                         case 59:
-                            GameConsole.ConsoleOutput("Corpo sem vida de um homem, seu rosto está dilacerado e suas roupas estão completamente sujas.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventAbandonedFortressInterestPointTwo"]);
                             break;
                         case 93:
-                            GameConsole.ConsoleOutput("Corpo sem vida de um jovem explorador, que infelicidade...");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventAbandonedFortressInterestPointThree"]);
                             break;
                         case 70:
-                            GameConsole.ConsoleOutput("Placa: Estrada que leva para as antigas ruinas.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventAbandonedFortressInterestPointFour"]);
                             break;
                     }
                     break;
@@ -533,17 +531,17 @@ namespace Console_RPG.Assistant
                     switch (ElementSumPosition(player.Y, player.X, map, element))
                     {
                         case 33:
-                            GameConsole.ConsoleOutput("Esqueleto bastante antigo, está sem cabeça e cheio de musgo.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventRuinsInterestPointOne"]);
                             break;                        
                         case 49:
-                            GameConsole.ConsoleOutput("Placa deteriorada: P s agem  ubter ân a log  em f ent .");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventRuinsInterestPointTwo"]);
                             break;
                         case 55:
-                            GameConsole.ConsoleOutput("Corpo sem vida de um jovem ladrão, há várias mordidas profundas no seu braço.");
-                            if (!player.Skills.Contains("Estocada"))
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventRuinsInterestPointThree"]);
+                            if (!player.Skills.Contains(Game.currentLanguageStrings["PlayerSkillThrust"]))
                             {
-                                player.TakeSkill("Estocada");
-                                GameConsole.ConsoleOutput("Nova técnica aprendida.");
+                                player.TakeSkill(Game.currentLanguageStrings["PlayerSkillThrust"]);
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventNewTechniqueLearned"]);
                             }
                             break;
                     }
@@ -552,19 +550,19 @@ namespace Console_RPG.Assistant
                     switch (ElementSumPosition(player.Y, player.X, map, element))
                     {
                         case 27:
-                            GameConsole.ConsoleOutput("Tumba de Major Edward o carrasco real.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventOldCryptInterestPointOne"]);
                             break;
                         case 46:
-                            GameConsole.ConsoleOutput("Tumba de Dorian o antigo rei de Trina.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventOldCryptInterestPointTwo"]);
                             break;
                         case 49:
-                            GameConsole.ConsoleOutput("Tumba de Jasmine a antiga rainha de Trina.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventOldCryptInterestPointThree"]);
                             break;
                         case 60:
-                            GameConsole.ConsoleOutput("Tumba sem identificação, uma grossa camada de poeira está sobre ela.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventOldCryptInterestPointFour"]);
                             break;
                         case 92:
-                            GameConsole.ConsoleOutput("Tumba de Sir Jones, o cavaleiro responsável por destruir a seita dos assassinos.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventOldCryptInterestPointFive"]);
                             break;
                     }
                     break;
@@ -572,18 +570,18 @@ namespace Console_RPG.Assistant
                     switch (ElementSumPosition(player.Y, player.X, map, element))
                     {
                         case 40:
-                            GameConsole.ConsoleOutput("Estátua de uma grande serpente.");
-                            if (!player.Skills.Contains("Corte da Lua"))
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventSerpentManDungeonInterestPointOne"]);
+                            if (!player.Skills.Contains(Game.currentLanguageStrings["PlayerSkillMoonSlash"]))
                             {
-                                player.TakeSkill("Corte da Lua");
-                                GameConsole.ConsoleOutput("Nova técnica aprendida.");
+                                player.TakeSkill(Game.currentLanguageStrings["PlayerSkillMoonSlash"]);
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventNewTechniqueLearned"]);
                             }
                             break;
                         case 55:
-                            GameConsole.ConsoleOutput("Pilha de ossos humanos.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventSerpentManDungeonInterestPointTwo"]);
                             break;
                         case 35:
-                            GameConsole.ConsoleOutput("Cadáver de um espadachim, há um corte bem profundo em seu peito.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventSerpentManDungeonInterestPointThree"]);
                             break;                        
                     }
                     break;
@@ -591,10 +589,10 @@ namespace Console_RPG.Assistant
                     switch (ElementSumPosition(player.Y, player.X, map, element))
                     {
                         case 30:
-                            GameConsole.ConsoleOutput("Grande gaiola de ferro usada para encarcerar prisioneiros.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventBanditsDomainInterestPointOne"]);
                             break;
                         case 72:
-                            GameConsole.ConsoleOutput("Baú usado para guardar itens saqueados.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventBanditsDomainInterestPointTwo"]);
                             break;                        
                     }
                     break;
@@ -602,42 +600,39 @@ namespace Console_RPG.Assistant
                     switch (ElementSumPosition(player.Y, player.X, map, element))
                     {
                         case 30:
-                            GameConsole.ConsoleOutput("Esqueleto de um guarda, pelo visto ele nunca foi liberado dos seus serviços.");
-                            break;
-                        case 72:
-                            GameConsole.ConsoleOutput("Baú usado para guardar itens saqueados.");
-                            break;
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventUndergroundPassageInterestPointOne"]);
+                            break;                        
                     }
                     break;
                 case "Ancient_Dragon_Cave":
                     switch (ElementSumPosition(player.Y, player.X, map, element))
                     {
                         case 62:
-                            GameConsole.ConsoleOutput("Corpo carbonizado.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventAncientDragonCaveInterestPointOne"]);
                             break;
                         case 52:
-                            GameConsole.ConsoleOutput("Corpo carbonizado.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventAncientDragonCaveInterestPointOne"]);
                             break;
                         case 74:
-                            GameConsole.ConsoleOutput("Esqueleto antigo.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventAncientDragonCaveInterestPointTwo"]);
                             break;
                         case 41:
-                            GameConsole.ConsoleOutput("Pilha de ossos.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventAncientDragonCaveInterestPointThree"]);
                             break;
                         case 42:
-                            GameConsole.ConsoleOutput("Pilha de ossos.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventAncientDragonCaveInterestPointThree"]);
                             break;
                         case 77:
-                            GameConsole.ConsoleOutput("Cadáver mumificado de um clérigo.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventAncientDragonCaveInterestPointFour"]);
                             if (!player.Inventory.Contains(Notes[5]))
                             {
                                 Sound.SFXPlayer("ItemPickupSFX.wav");
                                 player.FoundItem(Notes[5]);
                             }                            
-                            if (!player.Skills.Contains("Raios Divinos"))
+                            if (!player.Skills.Contains(Game.currentLanguageStrings["PlayerSkillGodRays"]))
                             {
-                                player.TakeSkill("Raios Divinos");
-                                GameConsole.ConsoleOutput("Nova técnica aprendida.");
+                                player.TakeSkill(Game.currentLanguageStrings["PlayerSkillGodRays"]);
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventNewTechniqueLearned"]);
                             }
                             break;
                     }
@@ -646,21 +641,21 @@ namespace Console_RPG.Assistant
                     switch (ElementSumPosition(player.Y, player.X, map, element))
                     {
                         case 54:
-                            GameConsole.ConsoleOutput("Esqueleto pendurado na grade da cela.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventConfinementInterestPointOne"]);
                             break;
                         case 91:
-                            GameConsole.ConsoleOutput("Esqueleto sem identificação.");
-                            if (!player.Skills.Contains("Dilacerar"))
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventConfinementInterestPointTwo"]);
+                            if (!player.Skills.Contains(Game.currentLanguageStrings["PlayerSkillBloodThrust"]))
                             {
-                                player.TakeSkill("Dilacerar");
-                                GameConsole.ConsoleOutput("Nova técnica aprendida.");
+                                player.TakeSkill(Game.currentLanguageStrings["PlayerSkillBloodThrust"]);
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventNewTechniqueLearned"]);
                             }
                             break;
                         case 77:
-                            GameConsole.ConsoleOutput("Rato Gigante morto, seu estomago está dilacerado.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventConfinementInterestPointThree"]);
                             break;
                         case 67:
-                            GameConsole.ConsoleOutput("Rato Gigante morto.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventConfinementInterestPointFour"]);
                             break;                        
                     }
                     break;
@@ -674,10 +669,10 @@ namespace Console_RPG.Assistant
                     switch (ElementSumPosition(player.Y, player.X, map, element))
                     {
                         case 75:
-                            GameConsole.ConsoleOutput("E assim essa aventura termina.");
-                            GameConsole.ConsoleOutput("Obrigado por ter jogado o meu jogo!");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventEndingTextOne"]);
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventEndingTextTwo"]);
                             player.TakeDamage(999);
-                            GameConsole.ConsoleOutput($"{player.Name} recebeu 999 pontos de dano!");
+                            GameConsole.ConsoleOutput($"{player.Name} {Game.currentLanguageStrings["EventEndingTextThree"]}");
                             Game.GameOver();
                             break;
                     }
@@ -700,7 +695,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Está trancado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventIt’sLockedText"]);
                             }
                             break;
                         case 30:
@@ -708,7 +703,7 @@ namespace Console_RPG.Assistant
                             Render.KillObject(player.X, player.Y, element, map, currentMap);
                             break;
                         case 46:
-                            GameConsole.ConsoleOutput("Está trancado.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventIt’sLockedText"]);
                             break;
                         case 58:
                             Sound.SFXPlayer("DoorSFX.wav");
@@ -739,7 +734,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Está trancado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventIt’sLockedText"]);
                             }
                             break;
                         case 101:
@@ -768,7 +763,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Está trancado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventIt’sLockedText"]);
                             }
                             break;
                         case 63:
@@ -779,7 +774,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Não abre por esse lado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventDoesn’tOpenFromThisSide"]);
                             }
                             break;
                         case 73:
@@ -791,7 +786,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Está trancado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventIt’sLockedText"]);
                             }
                             break;
                     }
@@ -824,7 +819,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Está trancado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventIt’sLockedText"]);
                             }
                             break;
                     }
@@ -840,7 +835,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Não abre por esse lado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventDoesn’tOpenFromThisSide"]);
                             }
                             break;
                         case 45:
@@ -925,7 +920,7 @@ namespace Console_RPG.Assistant
                             }
                             else
                             {
-                                GameConsole.ConsoleOutput("Não abre por esse lado.");
+                                GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventDoesn’tOpenFromThisSide"]);
                             }
                             break;
                         case 93:
@@ -961,7 +956,7 @@ namespace Console_RPG.Assistant
                             Render.KillObject(player.X, player.Y, element, map, currentMap);
                             break;
                         case 98:
-                            GameConsole.ConsoleOutput("Está trancado.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventIt’sLockedText"]);
                             break;
                     }
                     break;
@@ -1118,7 +1113,7 @@ namespace Console_RPG.Assistant
                             Render.KillObject(player.X, player.Y, element, map, currentMap);
                             break;
                         case 6:
-                            GameConsole.ConsoleOutput("Bolsa pequena de couro.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventSmallLeatherBag"]);
                             player.FoundItem(Potions[0]);
                             player.FoundItem(Potions[3]);
                             player.FoundItem(Potions[1]);
@@ -1210,7 +1205,7 @@ namespace Console_RPG.Assistant
                     switch (ElementSumPosition(player.Y, player.X, map, element))
                     {
                         case 39:
-                            GameConsole.ConsoleOutput("Bolsa grande de couro.");
+                            GameConsole.ConsoleOutput(Game.currentLanguageStrings["EventLargeLeatherBag"]);
                             player.FoundItem(Potions[2]);
                             player.FoundItem(Potions[1]);
                             player.FoundItem(Potions[4]);

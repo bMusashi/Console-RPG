@@ -15,7 +15,7 @@
             }
             Thread.Sleep(200);
             SetCursorPosition(81, 37);
-            Write("Continuar...");
+            Write(Game.currentLanguageStrings["Continue"]);
             ReadKey();
         }
     }

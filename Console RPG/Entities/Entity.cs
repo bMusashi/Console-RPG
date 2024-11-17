@@ -26,15 +26,14 @@ namespace Console_RPG.Entities
         internal int BaseDefensePoints { get; set; }        
         //Inventory
         internal List<Item> Inventory { get; set; }
-        internal Weapons EquipedWeapon { get; set; } = new Weapons("Vazio", string.Empty, 0);
-        internal Armors EquipedArmor { get; set; } = new Armors("Vazio", string.Empty, 0);
+        internal Weapons EquipedWeapon { get; set; } = new Weapons(Game.currentLanguageStrings["EmptyWeaponName"], string.Empty, 0);
+        internal Armors EquipedArmor { get; set; } = new Armors(Game.currentLanguageStrings["EmptyArmorName"], string.Empty, 0);
         //Attacks
         internal string[] Attacks { get; set; } = new string[2];
         //Skills
         internal List<string> Skills { get; set; } = [];
 
-        Random rnd = new();
-        //private readonly double[] DamageFormulaValues = [1.2, 1.2, 1.2, 1.5, 1.5, 1.5, 1.5, 1.5, 2.0, 2.0];
+        Random rnd = new();        
 
         public bool IsAlive()
         {
@@ -48,7 +47,7 @@ namespace Console_RPG.Entities
         internal void BattleTurnIndicator()
         {
             SetCursorPosition(95,38);
-            Write($"Turno do {Name}... ");
+            Write($"{Game.currentLanguageStrings["BattleTurnIndicator"]} {Name}... ");
             Thread.Sleep(1000);
         }
         //Stats Calculation
@@ -110,7 +109,7 @@ namespace Console_RPG.Entities
                 //int damage = Convert.ToInt32((StaminaCost / 2) + (DamageCalculator() * DamageFormulaValues[rnd.Next(DamageFormulaValues.Length)]) - target.DefenseCalculator());
                 int damage = Convert.ToInt32(DamageCalculator() * (LightAttackMultipliers[rnd.Next(LightAttackMultipliers.Length)] + 0.1) - target.DefenseCalculator());
                 if (damage <= 0) damage = 1;
-                Battle.BattleCastText(Name, "Ataque Leve", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["LightAttackName"], damage);
                 return damage;
             }
             else
@@ -129,7 +128,7 @@ namespace Console_RPG.Entities
                 //int damage = Convert.ToInt32((StaminaCost / 2) + (DamageCalculator() * (DamageFormulaValues[rnd.Next(DamageFormulaValues.Length)] + 0.2)) - target.DefenseCalculator());
                 int damage = Convert.ToInt32(DamageCalculator() * (HeavyAttackMultipliers[rnd.Next(HeavyAttackMultipliers.Length)] + 0.2) - target.DefenseCalculator());
                 if (damage <= 0) damage = 1;
-                Battle.BattleCastText(Name, "Ataque Pesado", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["HeavyAttackName"], damage);
                 return damage;
             }
             else
@@ -149,7 +148,7 @@ namespace Console_RPG.Entities
                 //int damage = Convert.ToInt32((StaminaCost / 2) + (DamageCalculator() * (DamageFormulaValues[rnd.Next(DamageFormulaValues.Length)] + 0.3)) - target.DefenseCalculator());
                 int damage = Convert.ToInt32(DamageCalculator() * (QuickStrikeMultipliers[rnd.Next(QuickStrikeMultipliers.Length)] + 0.3) - target.DefenseCalculator());
                 if (damage <= 0) damage = 1;
-                Battle.BattleCastText(Name, "Golpe Rápido", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["PlayerSkillSlash"], damage);
                 return damage;
             }
             else
@@ -169,7 +168,7 @@ namespace Console_RPG.Entities
                 //int damage = Convert.ToInt32((StaminaCost / 2) + (DamageCalculator() * (DamageFormulaValues[rnd.Next(DamageFormulaValues.Length)] + 0.3)) - target.DefenseCalculator());                
                 int damage = Convert.ToInt32(DamageCalculator() * (ThrustMultipliers[rnd.Next(ThrustMultipliers.Length)] + 0.3) - target.DefenseCalculator());
                 if (damage <= 0) damage = 1;
-                Battle.BattleCastText(Name, "Estocada", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["PlayerSkillThrust"], damage);
                 return damage;
             }
             else
@@ -188,7 +187,7 @@ namespace Console_RPG.Entities
                 //int damage = Convert.ToInt32((StaminaCost / 2) + (DamageCalculator() * (DamageFormulaValues[rnd.Next(DamageFormulaValues.Length)] + 0.5)) - target.DefenseCalculator());
                 int damage = Convert.ToInt32(DamageCalculator() * (MoonSlashMultipliers[rnd.Next(MoonSlashMultipliers.Length)] + 0.5) - target.DefenseCalculator());
                 if (damage <= 0) damage = 1;
-                Battle.BattleCastText(Name, "Corte da Lua", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["PlayerSkillMoonSlash"], damage);
                 return damage;
             }
             else
@@ -207,7 +206,7 @@ namespace Console_RPG.Entities
                 //int damage = Convert.ToInt32((StaminaCost / 2) + (DamageCalculator() * (DamageFormulaValues[rnd.Next(DamageFormulaValues.Length)] + 0.5)) - target.DefenseCalculator());
                 int damage = Convert.ToInt32(DamageCalculator() * (LacerateMultipliers[rnd.Next(LacerateMultipliers.Length)] + 0.5) - target.DefenseCalculator());
                 if (damage <= 0) damage = 1;
-                Battle.BattleCastText(Name, "Dilacerar", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["PlayerSkillBloodThrust"], damage);
                 return damage;
             }
             else
@@ -223,7 +222,7 @@ namespace Console_RPG.Entities
             {
                 CurrentStaminaPoints -= StaminaCost;
                 int damage = 999;
-                Battle.BattleCastText(Name, "Raios Divinos", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["PlayerSkillGodRays"], damage);
                 return damage;
             }
             else

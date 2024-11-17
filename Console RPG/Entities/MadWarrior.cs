@@ -6,7 +6,7 @@ namespace Console_RPG.Entities
     {
         internal MadWarrior()
         {
-            Name = "Guerreiro Louco";
+            Name = Game.currentLanguageStrings["EnemyMadWarriorName"];
             EnemySprite = "Text_Files\\Enemies_Sprite\\Mad_Warrior.txt";
 
             CurrentLevel = 4;
@@ -28,8 +28,8 @@ namespace Console_RPG.Entities
             DamageCalculator();
             DefenseCalculator();           
 
-            EquipedWeapon = new Weapons("Devastador", "", 8);
-            EquipedArmor = new Armors("Armadura de Placas", "", 8);            
+            EquipedWeapon = new Weapons(Game.currentLanguageStrings["DevastatorName"], "", 8);
+            EquipedArmor = new Armors(Game.currentLanguageStrings["PlateArmorName"], "", 8);
         }
     }
 }

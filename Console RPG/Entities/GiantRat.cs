@@ -4,7 +4,7 @@
     {
         internal GiantRat()
         {
-            Name = "Rato Gigante";
+            Name = Game.currentLanguageStrings["EnemyGiantRatName"];
             EnemySprite = "Text_Files\\Enemies_Sprite\\Giant_Rat.txt";
 
             CurrentLevel = 1;

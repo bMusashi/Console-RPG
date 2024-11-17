@@ -6,7 +6,7 @@ namespace Console_RPG.Entities
     {
         internal Thief()
         {
-            Name = "Ladrão";
+            Name = Game.currentLanguageStrings["EnemyThiefName"];
             EnemySprite = "Text_Files\\Enemies_Sprite\\Thief.txt";
 
             CurrentLevel = 1;
@@ -28,8 +28,8 @@ namespace Console_RPG.Entities
             DamageCalculator();
             DefenseCalculator();
 
-            EquipedWeapon = new Weapons("Adaga", "", 4);
-            EquipedArmor = new Armors("Jaquetão de Explorador", "", 4);            
+            EquipedWeapon = new Weapons(Game.currentLanguageStrings["DaggerName"], "", 4);
+            EquipedArmor = new Armors(Game.currentLanguageStrings["Explorer'sJacketName"], "", 4);            
         }
     }
 }

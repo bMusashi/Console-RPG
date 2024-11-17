@@ -17,13 +17,13 @@ namespace Console_RPG.Items
             Render.ConsoleClear("                                                  ", 11, 80, 18);
             Render.Draw(LevelParser.ParseFileToArray("Text_Files\\Console_Box.txt"), 80, 18);
             SetCursorPosition(81, 19);
-            Write($"Nome: {Name}");
+            Write($"{Game.currentLanguageStrings["InventoryTextName"]}: {Name}");
 
             SetCursorPosition(81, 21);
-            Write($"Proteção: {Defense}");
+            Write($"{Game.currentLanguageStrings["InventoryTextProtection"]}: {Defense}");
 
             SetCursorPosition(81, 23);
-            Write($"Descrição: ");
+            Write($"{Game.currentLanguageStrings["InventoryTextDescription"]}: ");
 
             string[] DescriptionSplited = Description.Split('|');
 

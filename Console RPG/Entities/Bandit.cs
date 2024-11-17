@@ -6,7 +6,7 @@ namespace Console_RPG.Entities
     {
         internal Bandit()
         {
-            Name = "Bandido";
+            Name = Game.currentLanguageStrings["EnemyBanditName"];
             EnemySprite = "Text_Files\\Enemies_Sprite\\Bandit.txt";
 
             CurrentLevel = 2;
@@ -28,8 +28,8 @@ namespace Console_RPG.Entities
             DamageCalculator();
             DefenseCalculator();
 
-            EquipedWeapon = new Weapons("Falcata de Ferro", "", 4);
-            EquipedArmor = new Armors("Couraça de Couro", "", 4);            
+            EquipedWeapon = new Weapons(Game.currentLanguageStrings["IronFalcataName"], "", 4);
+            EquipedArmor = new Armors(Game.currentLanguageStrings["LeatherBreastplateName"], "", 4);
         }
     }
 }

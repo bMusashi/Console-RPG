@@ -6,7 +6,7 @@ namespace Console_RPG.Entities
     {
         internal UndeadDragon()
         {
-            Name = "Dragão Morto-Vivo";
+            Name = Game.currentLanguageStrings["EnemyUndeadDragonName"];
             EnemySprite = "Text_Files\\Enemies_Sprite\\Undead_Dragon.txt";
 
             CurrentLevel = 5;

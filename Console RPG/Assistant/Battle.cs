@@ -11,11 +11,15 @@ namespace Console_RPG.Assistant
             do
             {
                 //Player's Turn
-                string[] Options = { "Ataque", "Técnica", "Item" };
+                string[] Options = { Game.currentLanguageStrings["OneVersusOneOptionAttack"], Game.currentLanguageStrings["OneVersusOneOptionSkill"], Game.currentLanguageStrings["OneVersusOneOptionItem"] };
                 bool AvailableOptionsMenu = true;
                 int OptionsIndex = 0;
                 int MissedTurn = 0;
                 Render.Draw(LevelParser.ParseFileToArray("Text_Files\\Battle_Box.txt"), 80, 0);
+                SetCursorPosition(101, 26);
+                Write(Game.currentLanguageStrings["OneVersusOneBattlesText"]);
+                SetCursorPosition(80, 30);
+                Write(Game.currentLanguageStrings["│ Weapon    │ Armor     ││ Weapon      Armor     │"]);
                 Render.Draw(LevelParser.ParseFileToArray(enemy.EnemySprite), 81, 1);
                 while (AvailableOptionsMenu)
                 {
@@ -96,6 +100,8 @@ namespace Console_RPG.Assistant
                                             case ConsoleKey.Enter:
                                                 switch (player.Attacks[AttacksIndex])
                                                 {
+                                                    case "Light Attack":
+                                                    case "Ataque Ligero":
                                                     case "Ataque Leve":
                                                         player.BattleTurnIndicator();
                                                         SuccessAttack = player.LightAttack(enemy);                                                        
@@ -106,6 +112,7 @@ namespace Console_RPG.Assistant
                                                         }
                                                         if (SuccessAttack != 255) enemy.TakeDamage(SuccessAttack);
                                                         break;
+                                                    case "Heavy Attack":
                                                     case "Ataque Pesado":
                                                         player.BattleTurnIndicator();
                                                         SuccessAttack = player.HeavyAttack(enemy);
@@ -159,6 +166,7 @@ namespace Console_RPG.Assistant
                                                 {
                                                     switch (player.EquipedSkill)
                                                     {
+                                                        case "Slash":
                                                         case "Golpe Rápido":
                                                             player.BattleTurnIndicator();
                                                             SuccessSkill = player.QuickStrike(enemy);
@@ -169,6 +177,7 @@ namespace Console_RPG.Assistant
                                                             }
                                                             if (SuccessSkill != 255) enemy.TakeDamage(SuccessSkill);
                                                             break;
+                                                        case "Thrust":
                                                         case "Estocada":
                                                             player.BattleTurnIndicator();
                                                             SuccessSkill = player.Thrust(enemy);
@@ -179,6 +188,8 @@ namespace Console_RPG.Assistant
                                                             }
                                                             if (SuccessSkill != 255) enemy.TakeDamage(SuccessSkill);
                                                             break;
+                                                        case "Moon Slash":
+                                                        case "Corte de Luna":
                                                         case "Corte da Lua":
                                                             player.BattleTurnIndicator();
                                                             SuccessSkill = player.MoonSlash(enemy);
@@ -189,6 +200,8 @@ namespace Console_RPG.Assistant
                                                             }
                                                             if (SuccessSkill != 255) enemy.TakeDamage(SuccessSkill);
                                                             break;
+                                                        case "Blood Thrust":
+                                                        case "Desgarrar":
                                                         case "Dilacerar":
                                                             player.BattleTurnIndicator();
                                                             SuccessSkill = player.Lacerate(enemy);
@@ -199,6 +212,8 @@ namespace Console_RPG.Assistant
                                                             }
                                                             if (SuccessSkill != 255) enemy.TakeDamage(SuccessSkill);
                                                             break;
+                                                        case "God Rays":
+                                                        case "Rayos Divinos":
                                                         case "Raios Divinos":
                                                             player.BattleTurnIndicator();
                                                             SuccessSkill = player.GodRays();
@@ -254,23 +269,35 @@ namespace Console_RPG.Assistant
                                                 string name = string.Empty;
                                                 switch (ShowedPotions[i].Name)
                                                 {
+                                                    case "Small Calendula Potion":                                                        
+                                                    case "Poción de Caléndula Pequeña":                                                        
                                                     case "Poção de Calêndula Pequena":
-                                                        name = "Poção de C.P";
+                                                        name = Game.currentLanguageStrings["BattleItemMenuSmallCalendulaPotionShort"];
                                                         break;
+                                                    case "Medium Calendula Potion":                                                        
+                                                    case "Poción de Caléndula Mediana":                                                        
                                                     case "Poção de Calêndula Média":
-                                                        name = "Poção de C.M";
+                                                        name = Game.currentLanguageStrings["BattleItemMenuMediumCalendulaPotionShort"];
                                                         break;
+                                                    case "Large Calendula Potion":                                                        
+                                                    case "Poción de Caléndula Grande":                                                        
                                                     case "Poção de Calêndula Grande":
-                                                        name = "Poção de C.G";
+                                                        name = Game.currentLanguageStrings["BattleItemMenuLargeCalendulaPotionShort"];
                                                         break;
+                                                    case "Small Ephedra Potion":
+                                                    case "Poción de Ephedra Pequeña":
                                                     case "Poção de Ephedra Pequena":
-                                                        name = "Poção de E.P";
+                                                        name = Game.currentLanguageStrings["BattleItemMenuSmallEphedraPotionShort"];
                                                         break;
+                                                    case "Medium Ephedra Potion":
+                                                    case "Poción de Ephedra Mediana":
                                                     case "Poção de Ephedra Média":
-                                                        name = "Poção de E.M";
+                                                        name = Game.currentLanguageStrings["BattleItemMenuMediumEphedraPotionShort"];
                                                         break;
+                                                    case "Large Ephedra Potion":
+                                                    case "Poción de Ephedra Grande":
                                                     case "Poção de Ephedra Grande":
-                                                        name = "Poção de E.G";
+                                                        name = Game.currentLanguageStrings["BattleItemMenuLargeEphedraPotionShort"];
                                                         break;
                                                 }
                                                 Write($"{name}");
@@ -309,12 +336,12 @@ namespace Console_RPG.Assistant
                                             case ConsoleKey.Enter:
                                                 try
                                                 {
-                                                    if (ShowedPotions[ItemIndex].Name.Contains("Calêndula"))
+                                                    if (ShowedPotions[ItemIndex].Name.Contains(Game.currentLanguageStrings["BattleItemPieceCalendula"]))
                                                     {
                                                         player.BattleTurnIndicator();
                                                         player.UseItemBattle(ShowedPotions[ItemIndex]);
                                                     }
-                                                    else if (ShowedPotions[ItemIndex].Name.Contains("Ephedra"))
+                                                    else if (ShowedPotions[ItemIndex].Name.Contains(Game.currentLanguageStrings["BattleItemPieceEphedra"]))
                                                     {
                                                         player.BattleTurnIndicator();
                                                         player.UseItemBattle(ShowedPotions[ItemIndex]);
@@ -342,6 +369,10 @@ namespace Console_RPG.Assistant
                 if (enemy.IsAlive())
                 {
                     Render.Draw(LevelParser.ParseFileToArray("Text_Files//Battle_Box.txt"), 80, 0);
+                    SetCursorPosition(101, 26);
+                    Write(Game.currentLanguageStrings["OneVersusOneBattlesText"]);
+                    SetCursorPosition(80, 30);
+                    Write(Game.currentLanguageStrings["│ Weapon    │ Armor     ││ Weapon      Armor     │"]);
                     player.BattleInformation();
                     enemy.BattleInformation();
                     Render.Draw(LevelParser.ParseFileToArray(enemy.EnemySprite), 81, 1);
@@ -352,7 +383,9 @@ namespace Console_RPG.Assistant
 
                     switch (enemy.Name)
                     {
+                        case "Giant Rat":
                         case "Rato Gigante":
+                        case "Rata Gigante":
                             if (choice >= 0 && choice <= 89)
                             {
                                 SuccessAttack = enemy.RatBite(player);
@@ -361,6 +394,7 @@ namespace Console_RPG.Assistant
                             }
                             else enemy.BattleAttackSkillMiss();
                             break;
+                        case "Skeleton":
                         case "Esqueleto":
                             if (choice >= 0 && choice <= 59)
                             {
@@ -377,6 +411,8 @@ namespace Console_RPG.Assistant
                             else enemy.BattleAttackSkillMiss();
                             break;
                         case "Ladrão":
+                        case "Thief":
+                        case "Ladrón":
                             if (choice >= 0 && choice <= 29)
                             {
                                 SuccessAttack = enemy.LightAttack(player);
@@ -397,6 +433,7 @@ namespace Console_RPG.Assistant
                             }
                             else enemy.BattleAttackSkillMiss();
                             break;
+                        case "Bandit":
                         case "Bandido":
                             if (choice >= 0 && choice <= 29)
                             {
@@ -418,6 +455,8 @@ namespace Console_RPG.Assistant
                             }
                             else enemy.BattleAttackSkillMiss();
                             break;
+                        case "Serpent Man":
+                        case "Hombre Serpiente":
                         case "Homem Serpente":
                             if (choice >= 0 && choice <= 28)
                             {
@@ -445,7 +484,9 @@ namespace Console_RPG.Assistant
                             }
                             else enemy.BattleAttackSkillMiss();
                             break;
-                        case "Morto-Vivo":
+                        case "Undead":
+                        case "Muerto Viviente":
+                        case "Morto-Vivo":                        
                             if (choice >= 0 && choice <= 48)
                             {
                                 SuccessAttack = enemy.HeavyAttack(player);
@@ -460,6 +501,8 @@ namespace Console_RPG.Assistant
                             }
                             else enemy.BattleAttackSkillMiss();
                             break;
+                        case "Bandit Marauder":
+                        case "Bandido Merodeador":
                         case "Bandido Saqueador":
                             if (choice >= 0 && choice <= 46)
                             {
@@ -481,6 +524,8 @@ namespace Console_RPG.Assistant
                             }
                             else enemy.BattleAttackSkillMiss();
                             break;
+                        case "Mad Warrior":
+                        case "Guerrero Loco":
                         case "Guerreiro Louco":
                             if (choice >= 0 && choice <= 46)
                             {
@@ -502,6 +547,8 @@ namespace Console_RPG.Assistant
                             }
                             else enemy.BattleAttackSkillMiss();
                             break;
+                        case "Undead Dragon":
+                        case "Dragón Muerto Viviente":
                         case "Dragão Morto-Vivo":
                             if (choice >= 0 && choice <= 46)
                             {
@@ -547,41 +594,42 @@ namespace Console_RPG.Assistant
         internal static void BattleCastText(string entityName, string skillName, int damage)
         {
             Render.ConsoleClear("                                  ", 5, 95, 34);            
-            string text = $"{entityName} usou {skillName}, e causou {damage} pontos de dano!";           
+            string text = $"{entityName} {Game.currentLanguageStrings["BattleCastTextPartOne"]} {skillName}, {Game.currentLanguageStrings["BattleCastTextPartTwo"]} {damage} {Game.currentLanguageStrings["BattleCastTextPartThree"]}!";
 
             SetCursorPosition(95, 34);
             Write($"{text[..34]}");
             SetCursorPosition(95, 35);
             if (text[34..].StartsWith(' ')) Write($"{text[35..]}"); else Write($"{text[34..]}");
             SetCursorPosition(95, 38);
-            Write("Continuar...");
+            Write(Game.currentLanguageStrings["Continue"]);
+            Thread.Sleep(500);
             ReadKey();
         }
         internal static void BattleSkillFail()
         {
             Render.ConsoleClear("                                  ", 5, 95, 34);
             SetCursorPosition(95, 34);
-            Write("Energia insuficiente!");
+            Write(Game.currentLanguageStrings["BattleSkillFailInsufficientEnergy"]);
             SetCursorPosition(95, 38);
-            Write("Continuar...");
+            Write(Game.currentLanguageStrings["Continue"]);
             ReadKey();
         }
         internal static void BattleLostTurn(string name)
         {
             Render.ConsoleClear("                                  ", 1, 95, 34);            
             SetCursorPosition(95, 34);
-            Write($"{name} perdeu a vez.");
+            Write($"{name} {Game.currentLanguageStrings["BattleLostTurnMissedTheTurn"]}.");
             SetCursorPosition(95, 38);
-            Write("Continuar...");
+            Write(Game.currentLanguageStrings["Continue"]);
             ReadKey();
         }
         internal static void BattleWin(string name)
         {
             Render.ConsoleClear("                                  ", 5, 95, 34);            
             SetCursorPosition(95, 34);
-            Write($"{name} venceu o combate!");
+            Write($"{name} {Game.currentLanguageStrings["BattleWinWonTheBattle"]}!");
             SetCursorPosition(95, 38);
-            Write("Continuar...");
+            Write(Game.currentLanguageStrings["Continue"]);
             ReadKey();
         }
     }

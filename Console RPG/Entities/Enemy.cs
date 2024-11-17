@@ -20,22 +20,22 @@ namespace Console_RPG.Entities
             Write(Name);
 
             SetCursorPosition(112, 28);
-            Write($"PV: {CurrentHealthPoints}/{CurrentMaxHealthPoints}");            
+            Write($"{Game.currentLanguageStrings["BattleInformationHP"]}: {CurrentHealthPoints}/{CurrentMaxHealthPoints}");            
             Menu.PercentageBar(HpPercentage, 21, 107, 29, ConsoleColor.DarkRed);
 
             SetCursorPosition(107, 31);
-            if (EquipedWeapon.Name != "Vazio") Write(EquipedWeapon.Name.Substring(0, (EquipedWeapon.Name.Length < 9) ? EquipedWeapon.Name.Length : 9)); else Write("  Vazio  ");
+            if (EquipedWeapon.Name != Game.currentLanguageStrings["BattleInformationEmpty"]) Write(EquipedWeapon.Name.Substring(0, (EquipedWeapon.Name.Length < 9) ? EquipedWeapon.Name.Length : 9)); else Write($"  {Game.currentLanguageStrings["BattleInformationEmpty"]}  ");
 
             SetCursorPosition(119, 31);
-            if (EquipedArmor.Name != "Vazio") Write(EquipedArmor.Name.Substring(0, (EquipedArmor.Name.Length < 9) ? EquipedArmor.Name.Length : 9)); else Write("  Vazio  ");
+            if (EquipedArmor.Name != Game.currentLanguageStrings["BattleInformationEmpty"]) Write(EquipedArmor.Name.Substring(0, (EquipedArmor.Name.Length < 9) ? EquipedArmor.Name.Length : 9)); else Write($"  {Game.currentLanguageStrings["BattleInformationEmpty"]}  ");
         }        
         internal void BattleAttackSkillMiss()
         {
             Render.ConsoleClear("                                  ", 5, 95, 34);            
             SetCursorPosition(95, 34);
-            Write($"{Name} errou o ataque!");
+            Write($"{Name} {Game.currentLanguageStrings["BattleAttackSkillMissText"]}!");
             SetCursorPosition(95, 38);
-            Write("Continuar...");
+            Write(Game.currentLanguageStrings["Continue"]);
             ReadKey();
         }
         internal int RatBite(Player target) //Ataque exclusivo do Giant Rat
@@ -49,7 +49,7 @@ namespace Console_RPG.Entities
                 //int damage = Convert.ToInt32((StaminaCost / 2) + (DamageCalculator() * (DamageFormulaValues[rnd.Next(DamageFormulaValues.Length)] + 0.2)) - target.DefenseCalculator());
                 int damage = Convert.ToInt32(DamageCalculator() * (RBiteMultipliers[rnd.Next(RBiteMultipliers.Length)] + 0.2) - target.DefenseCalculator());
                 if (damage <= 0) damage = 1;
-                Battle.BattleCastText(Name, "Mordida", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["EnemySkillBiteName"], damage);
                 return damage;
             }
             else
@@ -68,7 +68,7 @@ namespace Console_RPG.Entities
                 //int damage = Convert.ToInt32((StaminaCost / 2) + (DamageCalculator() * (DamageFormulaValues[rnd.Next(DamageFormulaValues.Length)] + 0.4)) - target.DefenseCalculator());
                 int damage = Convert.ToInt32(DamageCalculator() * (UBiteMultipliers[rnd.Next(UBiteMultipliers.Length)] + 0.4) - target.DefenseCalculator());
                 if (damage <= 0) damage = 1;
-                Battle.BattleCastText(Name, "Mordida", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["EnemySkillBiteName"], damage);
                 return damage;
             }
             else
@@ -87,7 +87,7 @@ namespace Console_RPG.Entities
                 //int damage = Convert.ToInt32((StaminaCost / 2) + (DamageCalculator() * (DamageFormulaValues[rnd.Next(DamageFormulaValues.Length)] + 0.2)) - target.DefenseCalculator());
                 int damage = Convert.ToInt32(DamageCalculator() * (SmashMultipliers[rnd.Next(SmashMultipliers.Length)] + 0.2) - target.DefenseCalculator());
                 if (damage <= 0) damage = 1;
-                Battle.BattleCastText(Name, "Esmagar", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["EnemySkillSmashName"], damage);
                 return damage;
             }
             else
@@ -106,7 +106,7 @@ namespace Console_RPG.Entities
                 //int damage = Convert.ToInt32((StaminaCost / 2) + (DamageCalculator() * (DamageFormulaValues[rnd.Next(DamageFormulaValues.Length)] + 0.4)) - target.DefenseCalculator());
                 int damage = Convert.ToInt32(DamageCalculator() * (BodyCrushMultipliers[rnd.Next(BodyCrushMultipliers.Length)] + 0.4) - target.DefenseCalculator());
                 if (damage <= 0) damage = 1;
-                Battle.BattleCastText(Name, "Constrição", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["EnemySkillBodyCrushName"], damage);
                 return damage;
             }
             else
@@ -125,7 +125,7 @@ namespace Console_RPG.Entities
                 //int damage = Convert.ToInt32((StaminaCost / 2) + (DamageCalculator() * (DamageFormulaValues[rnd.Next(DamageFormulaValues.Length)] + 0.6)) - target.DefenseCalculator());
                 int damage = Convert.ToInt32(DamageCalculator() * (BodySlamMultipliers[rnd.Next(BodySlamMultipliers.Length)] + 0.6) - target.DefenseCalculator());
                 if (damage <= 0) damage = 1;
-                Battle.BattleCastText(Name, "Arremesso", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["EnemySkillBodySlamName"], damage);
                 return damage;
             }
             else
@@ -144,7 +144,7 @@ namespace Console_RPG.Entities
                 //int damage = Convert.ToInt32((StaminaCost / 2) + (DamageCalculator() * (DamageFormulaValues[rnd.Next(DamageFormulaValues.Length)] + 0.5)) - target.DefenseCalculator());
                 int damage = Convert.ToInt32(DamageCalculator() * (DragonBiteMultipliers[rnd.Next(DragonBiteMultipliers.Length)] + 0.5) - target.DefenseCalculator());
                 if (damage <= 0) damage = 1;
-                Battle.BattleCastText(Name, "Mordida", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["EnemySkillBiteName"], damage);
                 return damage;
             }
             else
@@ -163,7 +163,7 @@ namespace Console_RPG.Entities
                 //int damage = Convert.ToInt32((StaminaCost / 2) + (DamageCalculator() * (DamageFormulaValues[rnd.Next(DamageFormulaValues.Length)] + 0.6)) - target.DefenseCalculator());
                 int damage = Convert.ToInt32(DamageCalculator() * (TailWhippingMultipliers[rnd.Next(TailWhippingMultipliers.Length)] + 0.6) - target.DefenseCalculator());
                 if (damage <= 0) damage = 1;
-                Battle.BattleCastText(Name, "Rabada", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["EnemySkillTailWhippingName"], damage);
                 return damage;
             }
             else
@@ -182,7 +182,7 @@ namespace Console_RPG.Entities
                 //int damage = Convert.ToInt32((StaminaCost / 2) + (DamageCalculator() * (DamageFormulaValues[rnd.Next(DamageFormulaValues.Length)] + 0.7)) - target.DefenseCalculator());
                 int damage = Convert.ToInt32(DamageCalculator() * (FireBreathMultipliers[rnd.Next(FireBreathMultipliers.Length)] + 0.7) - target.DefenseCalculator());
                 if (damage <= 0) damage = 1;
-                Battle.BattleCastText(Name, "Sopro de Fogo", damage);
+                Battle.BattleCastText(Name, Game.currentLanguageStrings["EnemySkillFireBreathName"], damage);
                 return damage;
             }
             else
